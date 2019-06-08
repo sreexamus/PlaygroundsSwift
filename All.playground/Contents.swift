@@ -64,5 +64,39 @@ if p1 === p3  {
 }
 
 
+// Observable wrapper for properties
+
+class Observable<T> {
+    var value: T {
+        didSet {
+            guard let completion = completion else {
+                return
+            }
+            completion(value)
+        }
+    }
+    private var completion: ((T) -> ())? = nil
+    
+    init(value: T) {
+        self.value = value
+    }
+
+    func observe(completion: @escaping (T) -> ()) {
+        self.completion = completion
+    }
+}
+
+var obsv = Observable<String>(value: "Reddy")
+
+
+obsv.observe { newValue in
+    print("new value being observed is \(newValue)")
+}
+
+obsv.value = "kanth"
+obsv.value = "ham"
+obsv.value = "sdfd"
+
+
 
 
