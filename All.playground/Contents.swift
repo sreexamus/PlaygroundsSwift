@@ -37,4 +37,32 @@ a.message()
 // A has strong reference to myClosure. myClosure has strong refernce to A(self strongly captured)
 
 
+// diff between == and ===
+class Person: Equatable {
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
+    let name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+let p1:Person = Person(name: "Red")
+let p2:Person = Person(name: "Red")
+
+let p3 = p1
+if p1 == p2 {
+    print("Equal")
+}
+
+if p1 === p3  {
+    print("Identical")
+} else {
+    print("not identical")
+}
+
+
+
 
